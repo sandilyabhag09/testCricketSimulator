@@ -166,10 +166,10 @@ public class App {
         int chase = ((firstBatTotal + thirdBatTotal) - secondBatTotal);
         if (chase < 0) {
             System.out.println("_____________________________________");
-            System.out.println(realTeam1Name + " total: " + thirdBatTotal + "/10, Australia wins by an innings and "
+            System.out.println(realTeam1Name + " total: " + thirdBatTotal + "/10, " + realTeam2Name + " wins by an innings and "
                     + Math.abs(((firstBatTotal + thirdBatTotal) - secondBatTotal)));
             System.out.println();
-            System.out.println();
+            System.exit(0);
         }
 
         System.out.println("_____________________________________");
@@ -186,36 +186,31 @@ public class App {
         for (i = 0; i < 2; i++) {
             team2ScoredInnings2[i] = scored(team2Ratings[i]);
             fourthBatTotal += team2ScoredInnings2[i];
-            if (chase - fourthBatTotal <= 0) {
                 System.out.println(team2Squads[i] + "..............." + team2ScoredInnings2[i]);
+                if (chase - fourthBatTotal <= 0) {
                 System.out.println("_____________________________________");
                 System.out.println(realTeam2Name + " total: " + fourthBatTotal + "/" + i + ", " + realTeam2Name
                         + " wins by 10 wickets");
 
                 break;
-            } else {
-                System.out.println(team2Squads[i] + "..............." + team2ScoredInnings2[i]);
-                continue;
-            }
+            } 
         }
-        for (i = 3; i < 11; i++) {
+        //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] --> [0, 1] + [2, 3, 4, 5, 6, 7, 8, 9, 10] = 10- (i - 1)
+        for (i = 2; i < 11; i++) {
             team2ScoredInnings2[i] = scored(team2Ratings[i]);
             fourthBatTotal += team2ScoredInnings2[i];
             if (chase - fourthBatTotal <= 0) {
                 System.out.println(team2Squads[i] + "..............." + team2ScoredInnings2[i]);
                 System.out.println("_____________________________________");
-                System.out.println(realTeam2Name + " total: " + fourthBatTotal + "/" + (i - 2) + ", " + realTeam2Name
-                        + " wins by " + (10 - (i - 2)) + " wickets");
+                System.out.println(realTeam2Name + " total: " + fourthBatTotal + "/" + (i - 1) + ", " + realTeam2Name
+                        + " wins by " + (10 - (i - 1)) + " wickets");
                 int[] winningTeamScores = new int[11];
                 for (int j = 0; j < 11; j++) {
                     winningTeamScores[i] = team2ScoredInnings2[i] + team2Scored[i];
                 }
                 System.out.println(mom(team2Squads, winningTeamScores));
                 break;
-            } else {
-                System.out.println(team2Squads[i] + "..............." + team2ScoredInnings2[i]);
-                continue;
-            }
+            } 
         }
         if (chase - fourthBatTotal > 0) {
             for (int j = 0; j < 11; j++) {
